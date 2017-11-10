@@ -70,5 +70,5 @@ To use the evolution on a player use `evolute(player_name)`
 You need at least 4 money to make an evolution
 
 _What does evolution improves?_
-* 25% chance of evolving the strength
-* 50% chance of evolving the life
+* 25% chance of evolving the strength (+4)
+* 50% chance of evolving the life (+2)
