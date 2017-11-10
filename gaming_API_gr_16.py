@@ -191,15 +191,21 @@ def launch_spell(launcher_name, target_name):
     target_name : Name of the creature/player who receives the spell (str)
 
     """
+    # The launcher of the spell does not exists
     if not character_exists(launcher_name):
         print('This character does not exists')
+    # The launcher of the spell is dead
     elif get_character_life(launcher_name) <= 0:
         print('This character is dead and can not launch a spell')
+    # The launcher of the spell is a HEALER
     elif get_character_variety(launcher_name) == 'healer':
+        # The team does not have enough money to launch the spell
         if get_team_money() < 5:
             print('Your team does not have enough money')
+        # The target of the spell does not exists or is not a player
         elif not character_exists(target_name):
             print('This character does not exists')
+        # The target of the spell is dead (can not heal a dead player)
         elif get_character_life(target_name) <= 0:
             print('You can not heal a dead character')
         else:
@@ -212,11 +218,15 @@ def launch_spell(launcher_name, target_name):
             set_team_money(get_team_money() - 5)
             print("%s(healer) has added 10 points of life to %s(%s)" %
                   (launcher_name, target_name, get_character_variety(target_name)))
+    # The launcher of the spell is a WIZARD
     elif get_character_variety(launcher_name) == ' wizard':
+        # The team does not have enough money to launch the spell
         if get_team_money() < 20:
             print('Your team does not have enough money')
+        # The target of the spell does not exists or is not a creature
         elif not creature_exists(target_name):
             print('This creature does not exists')
+        # The target of the spell is dead (can not attack a dead creature)
         elif get_creature_life(target_name) <= 0:
             print('That creature is not alive')
         else:
@@ -234,11 +244,15 @@ def launch_spell(launcher_name, target_name):
             else:
                 print("%s creature still has %d points of life" %
                       (target_name, get_creature_life(target_name)))
+    # The launcher of the spell is a NECROMANCER
     elif get_character_variety(launcher_name) == 'necromancer':
+        # The team does not have enough money to launch the spell
         if get_team_money() < 75:
             print('Your team does not have enough money')
+        # The target of the spell does not exists
         elif not character_exists(target_name):
             print('This character does not exists')
+        # The target of the spell is still alive (can resurrect a player still alive)
         elif get_character_life(target_name) > 0:
             print('%s(%s) is still alive' % (target_name, get_character_variety(target_name)))
         else:
