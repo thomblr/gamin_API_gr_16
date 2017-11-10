@@ -279,37 +279,36 @@ def evolute(name):
     name : Name of the player who wants to evolute (str)
 
     """
-    # Check if the character exists
-    if character_exists(name):
-        # Check if the character is still alive
-        if get_character_life(name) > 0:
-            # Check if the team has enough money
-            if get_team_money() >= 4:
-                print("Evolution of %s" % name)
-                set_team_money(get_team_money() - 4)
-
-                if is_lucky(25):
-                    new_character_strength = get_character_strength(name) + 4
-                    print("%s character has now %d points of strength" % (name, new_character_strength))
-                    set_character_strength(name, new_character_strength)
-                else:
-                    print('Your strength has not evolved')
-
-                if is_lucky(50):
-                    new_character_life = get_character_life(name) + 2
-                    print("%s character has now %d points of life" % (name, new_character_life))
-                    set_character_life(name, new_character_life)
-                else:
-                    print('Your life has not evolved')
-            # The team has not enough money
-            else:
-                print("Your team does not have enough money for evolution")
-        # Character not alive
-        else:
-            print("You can not evolute if you are dead")
-    # Character does not exists
+    # Character does not exists or is not a player
+    if not character_exists(name):
+        print('This character does not exists')
+    # Character is dead (can not evolute if he is dead)
+    elif get_character_life(name) <= 0:
+        print('You can not evolute if you are dead')
+    # Team does not have enough money for evolution (< 4)
+    elif get_team_money() < 4:
+        print('Your team does not have enough money for evolution')
     else:
-        print("This character does not exists")
+        """
+            Evolution of the strength : 25% of luck
+            Evolution of the life : 50% of luck
+        """
+        print("Evolution of %s" % name)
+        set_team_money(get_team_money() - 4)
+
+        if is_lucky(25):
+            new_character_strength = get_character_strength(name) + 4
+            print("%s character has now %d points of strength (+4)" % (name, new_character_strength))
+            set_character_strength(name, new_character_strength)
+        else:
+            print('Your strength has not evolved')
+
+        if is_lucky(50):
+            new_character_life = get_character_life(name) + 2
+            print("%s character has now %d points of life (+2)" % (name, new_character_life))
+            set_character_life(name, new_character_life)
+        else:
+            print('Your life has not evolved')
 
 
 def character_info(character_name):
