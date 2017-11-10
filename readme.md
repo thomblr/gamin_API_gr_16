@@ -54,11 +54,21 @@ When a creature is killed, the team earns `40 + 10 * nb_creature_killed` money.
 
 To use special abilities of players use `launch_spell(launcher_name, target_name)`
 
-TODO
+Only Healer, Wizard and Necromancer have a special ability
+
+**Healer**: Can heal a player for 5 money
+
+**Wizard**: Can reduce by 2 the life of a creature for 20 money
+
+**Necromancer**: Can resurrect a dead player for 75 money
 
 ### Evolution
 ***
 
 To use the evolution on a player use `evolute(player_name)`
 
-TODO
+You need at least 4 money to make an evolution
+
+_What does evolution improves?_
+* 25% chance of evolving the strength
+* 50% chance of evolving the life
