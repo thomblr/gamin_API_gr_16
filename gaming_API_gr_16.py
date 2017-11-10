@@ -56,10 +56,12 @@ def create_character(name, variety):
                 life = randint(5, 15)
                 strength = randint(5, 15)
 
-            if variety == 'dwarf' or variety == 'healer' or variety == 'necromancer':
-                reach = 'short'
-            else:
+            # Check if variety is elf or wizard -> long reach
+            if variety == 'elf' or variety == 'wizard':
                 reach = 'long'
+            # If not wizard and not elf -> can only be short reach
+            else:
+                reach = 'short'
 
             # Add the new character to the db
             add_new_character(name, variety, reach, strength, life)
