@@ -138,7 +138,7 @@ def attack(attacker_name, creature_name):
     elif get_creature_life(creature_name) <= 0:
         print('You can not attack this creature because she is dead')
     # Player does not have enough range
-    elif get_character_reach(attacker_name) == 'short' and get_creature_reach(creature_name) == 'long':
+    elif not can_attack(attacker_name, creature_name):
         print('You do not have enough reach to attack this creature')
     # All conditions are true
     else:
@@ -176,7 +176,7 @@ def attack(attacker_name, creature_name):
                     Attacker still alive
                     Reduce attacker life by creature strength
                 '''
-                if creature_reach == 'long' or creature_reach == 'short' and character_reach == 'short':
+                if can_attack(creature_name, attacker_name):
                     print("%s(%s) lost %d points of life, he still has %d point of life" %
                           (attacker_name, character_variety, creature_strength,
                            (character_life - creature_strength)))
