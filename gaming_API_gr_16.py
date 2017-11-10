@@ -33,6 +33,24 @@ def is_lucky(chance):
     return randint(0, 100) <= chance
 
 
+def can_attack(attacker_name, target_name):
+    """
+    Check if attacker can attack target, based on their reach
+    :param attacker_name: the name of the attacker (str)
+    :param target_name: the name of the target (str)
+    :return: if attacker can attack target (bool)
+    """
+
+    if character_exists(attacker_name) and creature_exists(target_name):
+        return get_character_reach(attacker_name) == 'long' \
+               or get_character_reach(attacker_name) == 'short' and get_creature_reach(target_name) == 'short'
+    elif creature_exists(attacker_name) and character_exists(target_name):
+        return get_creature_reach(attacker_name) == 'long' \
+               or get_creature_reach(attacker_name) == 'short' and get_character_reach(target_name) == 'short'
+    else:
+        return False
+
+
 def create_character(name, variety):
     """
     Create a new character with a unique name and a variety
